@@ -1,0 +1,21 @@
+package com.example.javafxpagesetup;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class HelloController {
+    @FXML
+    private TextField text;
+
+    @FXML
+    private Label labelshow;
+
+    @FXML
+    void onHelloButtonClick(ActionEvent event)
+    {
+
+        labelshow.setText(text.getText());
+
+    }
+}
