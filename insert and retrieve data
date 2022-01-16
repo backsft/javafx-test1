@@ -1,0 +1,47 @@
+package com.example.javafxpagesetup;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import java.sql.*;
+
+public class HelloController {
+    @FXML
+    private TextField text;
+
+    @FXML
+    private Label labelshow;
+
+    @FXML
+    void onHelloButtonClick(ActionEvent event)
+    {
+        String a=text.getText();
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test",
+                    "root",
+                    "admin");
+            Statement st = con.createStatement();
+            String drop = "insert into student1 values('"+a+"')";
+            st.execute(drop);
+
+
+            // solve for query a single data from a table column
+
+            String query5="select * from student1 where user='"+a+"'";
+            ResultSet rs =st.executeQuery(query5);
+            while(rs.next())
+            {
+                labelshow.setText(rs.getString("user"));
+                System.out.println(rs.getString("user"));
+            }          
+        }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }   
+
+    }
+}
